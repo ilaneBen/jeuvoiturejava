@@ -9,25 +9,24 @@ public class Tesla extends Vehicle {
     }
 
     public Tesla(int x, int y) {
-        super(x, y, 0, "Tesla", "/images/tesla.png");
+        super(x, y, 5, "Tesla", "/images/tesla.png");
     }
-
-    @Override
-    public void move() {
-        this.x += this.speed;
-    }
-
-    @Override
+  @Override
     public void accelerate() {
-        if (this.speed < 15) { // Tesla accélère plus vite
-            this.speed += 2;
-        }
+        this.speed += 2; 
     }
 
     @Override
     public void brake() {
-        if (this.speed > 0) {
-            this.speed--;
+        this.speed = Math.max(0, this.speed - 2); 
+    }
+
+    @Override
+    public void move() {
+        this.y -= this.speed; // Déplacement vertical vers le bas
+        if (this.y < -50) {   // Réinitialise lorsque hors écran
+            this.y = 400;
+            this.x = (int) (Math.random() * 740); // Nouvelle position aléatoire
         }
     }
-} 
+}

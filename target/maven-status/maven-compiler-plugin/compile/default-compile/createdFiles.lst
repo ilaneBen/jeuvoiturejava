@@ -1,0 +1,15 @@
+com\example\config\SecurityConfig.class
+com\example\service\VehicleUpdateTask.class
+com\example\model\Tesla.class
+com\example\model\Ferrari.class
+com\example\controller\GameController.class
+com\example\controller\VehicleController.class
+com\example\service\ScoreService.class
+com\example\model\Vehicle.class
+com\example\App.class
+com\example\controller\ScoreController.class
+com\example\service\CollisionService.class
+com\example\model\PlayerCar.class
+com\example\model\Score.class
+com\example\repository\ScoreRepository.class
+com\example\repository\VehicleRepository.class

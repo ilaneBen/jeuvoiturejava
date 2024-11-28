@@ -11,29 +11,27 @@
             position: relative;
             margin: 20px auto;
             background-color: #808080;
+            overflow: hidden;
+            background-image:url('/images/images.jpeg');
+            background-size: cover;
+
         }
-        
-        .road-line {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            height: 5px;
-            background-color: white;
-            border-style: dashed;
-        }
-        
+
         .vehicle {
             width: 60px;
             height: 30px;
             position: absolute;
-            bottom: 20px;
         }
-        
+
+        .player-car {
+            
+        }
+
         .controls {
             text-align: center;
             margin: 20px;
         }
-        
+
         .vehicles-list {
             width: 800px;
             margin: 20px auto;
@@ -41,7 +39,7 @@
             background-color: #f5f5f5;
             border-radius: 5px;
         }
-        
+
         .vehicle-item {
             display: flex;
             align-items: center;
@@ -50,7 +48,7 @@
             background-color: white;
             border-radius: 5px;
         }
-        
+
         button {
             padding: 10px 20px;
             margin: 0 10px;
@@ -61,37 +59,42 @@
 </head>
 <body>
     <h1>Course de Voiture 2D</h1>
-    
-    <div class="game-container">
+
+    <!-- Conteneur du jeu -->
+    <div class="game-container" id="game-container">
         <div class="road-line"></div>
         <div th:each="vehicle : ${vehicles}">
-            <img th:src="${vehicle.imageUrl}" 
+            <img th:src="${vehicle.imageUrl}"
+                 th:attr="data-id=${vehicle.id}"
                  th:style="'left:' + ${vehicle.x} + 'px; bottom:' + ${vehicle.y} + 'px'"
-                 class="vehicle">
+                 class="vehicle"
+                 th:classappend="${vehicle.type == 'PlayerCar' ? 'player-car' : ''}">
+                
         </div>
-    </div>
-    
-    <div class="controls">
-        <form action="/addTesla" method="post">
-            <button type="submit">Ajouter une Tesla</button>
-        </form>
-    </div>
-    
-    <div class="vehicles-list">
-        <h2>Véhicules en jeu</h2>
-        <div th:each="vehicle : ${vehicles}" class="vehicle-item">
-            <img th:src="${vehicle.imageUrl}" width="30">
-            <span th:text="${vehicle.type}"></span>
-            <span th:text="'Vitesse: ' + ${vehicle.speed}"></span>
-        </div>
+        
     </div>
 
-    <script>
-        function updateVehicles() {
-            // Vous pouvez ajouter ici la logique de mise à jour des positions
-        }
-        
-        setInterval(updateVehicles, 50);
-    </script>
+
+    <!-- Tableau des scores -->
+    <div class="scores">
+        <h2>Tableau des Scores</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Véhicule</th>
+                    <th>Distance</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="score : ${scores}">
+                    <td th:text="${score.vehicleType}"></td>
+                    <td th:text="${score.distance}"></td>
+                    <td th:text="${score.points}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="../js/script.js"></script>
 </body>
-</html> 
+</html>
